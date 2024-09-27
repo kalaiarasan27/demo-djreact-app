@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import logo from "../assets/image/logotrans.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -186,7 +185,6 @@ const Register1 = () => {
  
   const validateForm = () => {
     const newErrors = {};
- 
     if (!formData.name) newErrors.name = "Valid name is required";
     if (!formData.contact || !/^\d{10}$/.test(formData.contact))
       newErrors.contact = "Valid phone number is required";
@@ -629,12 +627,6 @@ const Register1 = () => {
      
  
               <input type="hidden" name="role" value={formData.role} />
-              {/* <ReCAPTCHA
-                sitekey="6Lfv4zQqAAAAAKAqWKH0hazJhWnjHmpH8WYMoiNp"
-                onChange={(value) => setCaptchaValue(value)}
-                className="mt-4"
-              /> */}
-             
               <div className="terms mt-4">
                 <input
                   type="checkbox"
