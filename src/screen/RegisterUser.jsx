@@ -510,7 +510,7 @@ const RegisterUser = () => {
               </div>
      
  
-              <input type="hidden" name="role" value={formData.role} />
+              {/* <input type="hidden" name="role" value={formData.role} /> */}
               {/* <ReCAPTCHA
                 sitekey="6Lfv4zQqAAAAAKAqWKH0hazJhWnjHmpH8WYMoiNp"
                 onChange={(value) => setCaptchaValue(value)}
