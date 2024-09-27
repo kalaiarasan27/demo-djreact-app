@@ -53,7 +53,7 @@ const OtpVerification = () => {
 
     e.preventDefault();
     // Make the POST request to the Django backend to resend OTP
-    fetch('https://django-djreact-app-d5af3d4e3559.herokuapp.com/resend-otp/', {
+    fetch('https://demo-djreact-recyc-app-ee540343796a.herokuapp.com/resend-otp/', {
       credentials: 'include', // Ensures cookies are sent
         method: 'POST', // This is a POST request to trigger the OTP resend
         headers: {
@@ -85,7 +85,7 @@ const OtpVerification = () => {
     const enteredOtp = otp.join(""); 
     console.log("Otp Button Clicked");
  
-    fetch("https://django-djreact-app-d5af3d4e3559.herokuapp.com/otp/", {
+    fetch("https://demo-djreact-recyc-app-ee540343796a.herokuapp.com/otp/", {
       method: "POST",
       credentials: "include",
       headers: {

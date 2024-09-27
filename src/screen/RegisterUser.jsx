@@ -243,7 +243,7 @@ const RegisterUser = () => {
         return cookieValue;
       }
    
-      fetch("https://django-djreact-app-d5af3d4e3559.herokuapp.com/register-form/", {
+      fetch("https://demo-djreact-recyc-app-ee540343796a.herokuapp.com/register-form/", {
       // fetch("http://127.0.0.1:8000/register_view/", {
         credentials: 'include', // Ensures cookies are sent
         method: "POST",
