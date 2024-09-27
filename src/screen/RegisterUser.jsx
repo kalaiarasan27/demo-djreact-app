@@ -38,7 +38,7 @@ const RegisterUser = () => {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [captchaValue, setCaptchaValue] = useState(null);
+  // const [captchaValue, setCaptchaValue] = useState(null);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isPasswordVisible1, setIsPasswordVisible1] = useState(false);
   const navig = useNavigate();
@@ -218,10 +218,10 @@ const RegisterUser = () => {
  
     // If no validation errors, proceed with form submission
     if (Object.keys(formErrors).length === 0) {
-      if (!captchaValue) {
-        setError("Please complete the reCAPTCHA.");
-        return;
-      }
+      // if (!captchaValue) {
+      //   setError("Please complete the reCAPTCHA.");
+      //   return;
+      // }
  
       localStorage.removeItem('formData');
  
@@ -511,11 +511,11 @@ const RegisterUser = () => {
      
  
               <input type="hidden" name="role" value={formData.role} />
-              <ReCAPTCHA
+              {/* <ReCAPTCHA
                 sitekey="6Lfv4zQqAAAAAKAqWKH0hazJhWnjHmpH8WYMoiNp"
                 onChange={(value) => setCaptchaValue(value)}
                 className="mt-4"
-              />
+              /> */}
              
               <div className="terms mt-4">
                 <input
