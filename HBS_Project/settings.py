@@ -190,7 +190,9 @@ CORS_ALLOWED_ORIGINS = [
     'https://hsb-admin-ui.onrender.com',
     'https://hsb-ui.onrender.com',
     'https://hbs-admin-afcea2f2324b.herokuapp.com',
-    'https://new-hbs-admin-82beda5bc10a.herokuapp.com'
+    'https://new-hbs-admin-82beda5bc10a.herokuapp.com',
+    'https://demo-djreact-recyc-app-ee540343796a.herokuapp.com/'
+
 ]
 
 CORS_ORGIN_ALLOW_ALL = True
@@ -203,7 +205,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://hsb-admin-ui.onrender.com',
     'https://hsb-ui.onrender.com',
     'https://hbs-admin-afcea2f2324b.herokuapp.com',
-    'https://new-hbs-admin-82beda5bc10a.herokuapp.com'
+    'https://new-hbs-admin-82beda5bc10a.herokuapp.com',
+    'https://demo-djreact-recyc-app-ee540343796a.herokuapp.com/'
+
 
 ]
 
