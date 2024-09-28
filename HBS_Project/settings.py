@@ -114,14 +114,15 @@ WSGI_APPLICATION = 'HBS_Project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bong599rpr85d37q',
-        'HOST':'qbhol6k6vexd5qjs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-        'USER':'vp74v4k1viap1uyd',
-        'PASSWORD':'t2ubeigrwyu0jqyg',
+        'NAME': 'iouglvt01h4ci7xr',
+        'HOST':'g3v9lgqa8h5nq05o.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'USER':'k7hfmgnudk95cuf1',
+        'PASSWORD':'plheafgysnujutni',
         'PORT':'3306',
 
     }
 }
+# mysql://k7hfmgnudk95cuf1:plheafgysnujutni@g3v9lgqa8h5nq05o.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/iouglvt01h4ci7xr
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',

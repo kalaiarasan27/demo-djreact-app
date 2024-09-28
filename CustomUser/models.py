@@ -144,7 +144,8 @@ class Scrap_Type(models.Model):
 # Dealer Model
 class Dealer_Details(models.Model):
     # Dealer_Reference = models.OneToOneField(Dealer_Table, on_delete=models.CASCADE)
-    Dealer_ID = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    Dealer_ID = models.IntegerField(null=False,unique=True)
     Dealer_Name = models.CharField(max_length=50)
     mail_id = models.EmailField(unique=False)
     DOB = models.CharField(max_length=60)
