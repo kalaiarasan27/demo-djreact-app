@@ -257,8 +257,8 @@ def resend_otp_view(request):
 
             # Generate a random 6-digit OTP
                                     # Twilio credentials
-            account_sid = os.getenv('TWILIO_ACOOUNT_SID')
-            auth_token =  os.getenv('TWILIO_ACOOUNT_AUTH_TOKEN')
+            account_sid = config('TWILIO_ACOOUNT_SID')
+            auth_token =  config('TWILIO_ACOOUNT_AUTH_TOKEN')
             client = Client(account_sid, auth_token)
             
             # File to store the OTP send count
