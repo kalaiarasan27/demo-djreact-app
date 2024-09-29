@@ -262,3 +262,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # For development (to see the email in the terminal)
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+
+# Twilio Block
+
+TWILIO_ACOOUNT_SID = config('TWILIO_ACOOUNT_SID')
+TWILIO_ACOOUNT_AUTH_TOKEN = config('TWILIO_ACOOUNT_AUTH_TOKEN')
