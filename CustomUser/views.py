@@ -308,17 +308,11 @@ def resend_otp_view(request):
                 return otp
             
             # Function to validate OTP
-            def validate_otp(sent_otp, user_otp, start_time):
+            def validate_otp(sent_otp, start_time):
                 current_time = time.time()
                 # Check if the OTP is still valid (30 seconds)
                 if current_time - start_time > 60:
                     print("OTP is invalid: Time expired")
-                    return False
-                if sent_otp == user_otp:
-                    print("OTP is valid")
-                    return True
-                else:
-                    print("Invalid OTP")
                     return False
             
             # Main function
@@ -331,10 +325,10 @@ def resend_otp_view(request):
                 start_time = time.time()  # Record the time when OTP is sent
             
                 # Simulate user input for OTP
-                user_otp = int(input("Enter the OTP you received: "))
+                # user_otp = int(input("Enter the OTP you received: "))
             
                 # Validate the OTP
-                validate_otp(sent_otp, user_otp, start_time)
+                validate_otp(sent_otp, start_time)
             
             if __name__ == "__main__":
                 main()
@@ -344,7 +338,7 @@ def resend_otp_view(request):
     except Exception as e:
         print(e)
  
-    return JsonResponse({'message': 'Invalid request method.'}, status=400)
+    return JsonResponse({'message': 'Invalid request method.'}, status=405)
 
 @csrf_exempt# OTP Block
 def register_view(request):
@@ -438,22 +432,104 @@ def register_view(request):
             print("To phone Number-",otp_phoneNumber)
             
             # Generate a random 6-digit OTP
-            otp = random.randint(100000, 999999)
-            print(f"Generated OTP: {otp}")  # This is just for testing, remove it in production
-            request.session['otp'] = otp
+            # otp = random.randint(100000, 999999)
+            # print(f"Generated OTP: {otp}")  # This is just for testing, remove it in production
+            # request.session['otp'] = otp
  
+            # account_sid = config('TWILIO_ACOOUNT_SID')
+            # auth_token =  config('TWILIO_ACOOUNT_AUTH_TOKEN')
+            # client = Client(account_sid, auth_token)
+            # message = client.messages.create(
+            # from_='+1 913 270 1336',  # Note the underscore after from
+            # body = f"Your OTP code is {otp}. Please use this to verify your account.", # OTP message content
+            # to= otp_phoneNumber
+            # )
+
+            # print(message)
+
+            # return JsonResponse({'message': 'OTP sent successfully!'})
+
+                                                # Twilio credentials
             account_sid = config('TWILIO_ACOOUNT_SID')
             auth_token =  config('TWILIO_ACOOUNT_AUTH_TOKEN')
             client = Client(account_sid, auth_token)
-            message = client.messages.create(
-            from_='+1 913 270 1336',  # Note the underscore after from
-            body = f"Your OTP code is {otp}. Please use this to verify your account.", # OTP message content
-            to= otp_phoneNumber
-            )
+            
+            # File to store the OTP send count
+            otp_count_file = 'otp_count.txt'
+            
+            # Initialize global variables
+            max_otp_send_limit = 5  # Maximum number of OTP sends
+            
+            # Function to generate a random OTP
+            def generate_otp():
+                return random.randint(100000, 999999)
+            
 
-            print(message)
+            
+            # Function to read the current OTP send count from a file
+            def read_otp_count():
+                if os.path.exists(otp_count_file):
+                    with open(otp_count_file, 'r') as f:
+                        count = f.read()
+                        return int(count) if count.isdigit() else 0
+                return 0
+            
+            # Function to write the OTP send count to a file
+            def write_otp_count(count):
+                with open(otp_count_file, 'w') as f:
+                    f.write(str(count))
+            
+            # Function to send OTP via SMS
+            def send_otp(to_phone_number):
+                current_count = read_otp_count()
+                if current_count >= max_otp_send_limit:
+                    print("Error: OTP has already been sent the maximum number of times.")
+                    # return None  # Stop sending if limit is reached
+                    return JsonResponse({"Error: OTP has already been sent the maximum number of times."},status=400)
+            
+                otp = generate_otp()
+                request.session['otp'] = otp
 
-            return JsonResponse({'message': 'OTP sent successfully!'})
+                message = client.messages.create(
+                    from_='+19132701336',  # Twilio phone number
+                    body=f'Your OTP is: {otp}',
+                    to=to_phone_number
+                )
+                print(f'Sent message: {message.sid}')
+            
+                # Increment the OTP send count and write to file
+                write_otp_count(current_count + 1)
+                return otp
+            
+            # Function to validate OTP
+            def validate_otp(sent_otp, start_time):
+                current_time = time.time()
+                # Check if the OTP is still valid (30 seconds)
+                if current_time - start_time > 60:
+                    print("OTP is invalid: Time expired")
+                    # return False
+                    return JsonResponse({"OTP is invalid: Time expired"},status=400)
+
+            
+            # Main function
+            def main():
+                to_phone_number = otp_phoneNumber  # User's phone number
+                sent_otp = send_otp(to_phone_number)  # Send the OTP
+                if sent_otp is None:  # If OTP send failed (limit reached), exit
+                    return
+            
+                start_time = time.time()  # Record the time when OTP is sent
+            
+                # Simulate user input for OTP
+                # user_otp = int(input("Enter the OTP you received: "))
+            
+                # Validate the OTP
+                validate_otp(sent_otp, start_time)
+            
+            if __name__ == "__main__":
+                main()
+
+            return JsonResponse({'message': 'OTP resent successfully!'})
 
     except Exception as e:
         print("Exeption is ",e)
